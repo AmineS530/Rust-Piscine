@@ -1,6 +1,5 @@
-workspace = { members = ["looping"] }
 [package]
-name = "speed_transformation"
+name = "looping"
 version = "0.1.0"
 edition = "2021"
 
