@@ -7,7 +7,7 @@ fn random_gen(max: u8) -> u8 {
     value as u8
 }
 
-#[derive(Debug, Clone, Copy, PartialEq)]
+#[derive(Debug, PartialEq)]
 pub enum Suit {
     Heart,
     Diamond,
@@ -15,7 +15,7 @@ pub enum Suit {
     Club,
 }
 
-#[derive(Debug, Clone, Copy, PartialEq)]
+#[derive(Debug, PartialEq)]
 pub enum Rank {
     Number(u8),
     Ace,
@@ -24,7 +24,7 @@ pub enum Rank {
     Jack,
 }
 
-#[derive(Debug, Clone, Copy)]
+#[derive(Debug, PartialEq)]
 pub struct Card {
     pub suit: Suit,
     pub rank: Rank,
