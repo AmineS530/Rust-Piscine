@@ -1,36 +1,40 @@
 pub fn delete_and_backspace(s: &mut String) {
     let mut res = String::new();
-    for char in s.chars() {
-        if char == '+' {
-            char.next();
-            continue;
-        } else if char == '-' {
-            res.pop();
-            continue;
+    let mut chars = s.chars();
+    let mut delete_counter = 0;
+
+    while let Some(c) = chars.next() {
+        match c {
+            '+' => {
+                delete_counter += 1;
+            }
+            '-' => {
+                res.pop();
+            }
+            _ => {
+                if delete_counter > 0 {
+                    delete_counter -= 1;
+                } else {
+                    res.push(c); // keep the character
+                }
+            }
         }
-        res.push(char);
     }
+
     *s = res;
 }
 
-// pub fn do_operations(v: &mut [String]) {}
-// pub fn delete_and_backspace(s: &mut String) {
-//     let mut res = String::new();
-//     let mut chars = s.chars().peekable();
+pub fn do_operations(v: &mut [String]) {
+    for op in v.iter_mut() {
+        let parts: Vec<&str> = if op.contains('+') {
+            op.split('+').collect()
+        } else {
+            op.split('-').collect()
+        };
+        let first = parts[0].parse::<i32>().unwrap_or(0);
+        let second = parts[1].parse::<i32>().unwrap_or(0);
 
-//     while let Some(c) = chars.next() {
-//         match c {
-//             '-' => {
-//                 res.pop(); // remove last added char
-//             }
-//             '+' => {
-//                 chars.next(); // skip the next character
-//             }
-//             _ => {
-//                 res.push(c);
-//             }
-//         }
-//     }
-
-//     *s = res;
-// }
+        let result = if op.contains('+') { first + second } else { first - second };
+        *op = result.to_string();
+    }
+}
