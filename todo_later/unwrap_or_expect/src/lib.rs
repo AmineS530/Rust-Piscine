@@ -24,8 +24,8 @@ pub enum Security {
 
 // UnexpectedUrl: Returns the error message or panics with the error message being the server URL.
 
-pub fn fetch_data(server: Result<&str, &str>, security_level: Security) -> String {
-    match security_level {
-        Security::Unknown => {}
-    }
-}
+// pub fn fetch_data(server: Result<&str, &str>, security_level: Security) -> String {
+//     match security_level {
+//         Security::Unknown => {}
+//     }
+// }
