@@ -1,6 +1,6 @@
 pub mod mall;
 
-use crate::mall::*;
+use mall::*;
 
 use std::collections::HashMap;
 
