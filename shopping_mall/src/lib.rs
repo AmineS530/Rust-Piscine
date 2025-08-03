@@ -11,7 +11,7 @@ pub fn biggest_store(mall: &Mall) -> (String, Store) {
         .max_by_key(|(_, store)| store.square_meters)
         .map(|(name, store)| (name.clone(), store.clone()))
         .unwrap()
-}
+} 
 
 pub fn highest_paid_employee(mall: &Mall) -> Vec<(String, Employee)> {
     let mut highest = 0.0;
