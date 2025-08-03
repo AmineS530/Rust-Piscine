@@ -1,5 +1,4 @@
 use shopping_mall::*;
-use mall::*;
 
 fn main() {
     let mut mall = Mall::new(
