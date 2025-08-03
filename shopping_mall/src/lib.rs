@@ -13,23 +13,22 @@ pub fn biggest_store(mall: &Mall) -> (String, Store) {
         .unwrap()
 }
 
-pub fn highest_paid_employee(mall: &Mall) -> Vec<(String, Employee)> {
+pub fn highest_paid_employee(mall: &Mall) -> Vec<(&str, &Employee)> {
     let mut highest = 0.0;
-    let mut result = vec![];
+    let mut result: Vec<(&str, &Employee)> = vec![];
 
     for floor in mall.floors.values() {
         for store in floor.stores.values() {
             for (name, emp) in &store.employees {
                 if emp.salary > highest {
                     highest = emp.salary;
-                    result = vec![(name.clone(), *emp)];
+                    result = vec![(name, emp)];
                 } else if (emp.salary - highest).abs() < f64::EPSILON {
-                    result.push((name.clone(), *emp));
+                    result.push((name, emp));
                 }
             }
         }
     }
-
     result
 }
 
