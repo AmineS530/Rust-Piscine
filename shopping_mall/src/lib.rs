@@ -1,6 +1,6 @@
 pub mod mall;
 
-pub use mall::*;
+pub use crate::mall::*;
 
 use std::collections::HashMap;
 
@@ -15,18 +15,16 @@ pub fn biggest_store(mall: &Mall) -> (String, Store) {
 
 pub fn highest_paid_employee(mall: &Mall) -> Vec<(String, Employee)> {
     let mut highest = 0.0;
-    let mut result: Vec<(String, Employee)> = Vec::new();
+    let mut result = vec![];
 
     for floor in mall.floors.values() {
         for store in floor.stores.values() {
             for (name, emp) in &store.employees {
-                let employee = (*emp).clone(); 
-
                 if emp.salary > highest {
                     highest = emp.salary;
-                    result = vec![(name.clone(), employee)];
+                    result = vec![(name.clone(), *emp)];
                 } else if (emp.salary - highest).abs() < f64::EPSILON {
-                    result.push((name.clone(), employee));
+                    result.push((name.clone(), *emp));
                 }
             }
         }
