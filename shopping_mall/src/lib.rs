@@ -11,20 +11,22 @@ pub fn biggest_store(mall: &Mall) -> (String, Store) {
         .max_by_key(|(_, store)| store.square_meters)
         .map(|(name, store)| (name.clone(), store.clone()))
         .unwrap()
-} 
+}
 
 pub fn highest_paid_employee(mall: &Mall) -> Vec<(String, Employee)> {
     let mut highest = 0.0;
-    let mut result = vec![];
+    let mut result: Vec<(String, Employee)> = Vec::new();
 
     for floor in mall.floors.values() {
         for store in floor.stores.values() {
             for (name, emp) in &store.employees {
+                let employee = (*emp).clone(); 
+
                 if emp.salary > highest {
                     highest = emp.salary;
-                    result = vec![(name.clone(), *emp)];
+                    result = vec![(name.clone(), employee)];
                 } else if (emp.salary - highest).abs() < f64::EPSILON {
-                    result.push((name.clone(), *emp));
+                    result.push((name.clone(), employee));
                 }
             }
         }
