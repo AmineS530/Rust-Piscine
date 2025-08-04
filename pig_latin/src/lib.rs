@@ -5,31 +5,32 @@ pub fn pig_latin(text: &str) -> String {
         .map(|word| {
             let chars: Vec<char> = word.chars().collect();
 
-            // Case 1: Starts with a vowel
+            // Starts with a vowel
             if vowels.contains(&chars[0]) {
-                format!("{word}ay")
+                return format!("{word}ay");
             }
-            // Case 2: Starts with consonant + "qu" (like "squash")
-            else if chars.len() > 2 && !vowels.contains(&chars[0]) && chars[1] == 'q' && chars[2] == 'u' {
-                let rest: String = chars[3..].iter().collect();
-                let prefix: String = chars[..3].iter().collect(); // consonant + "qu"
-                format!("{rest}{prefix}ay")
-            }
-            // Case 3: Starts with "qu" (like "quick")
-            else if chars.len() > 1 && chars[0] == 'q' && chars[1] == 'u' {
-                let rest: String = chars[2..].iter().collect();
-                format!("{rest}quay")
-            }
-            // Case 4: Starts with consonants until first vowel
-            else {
-                let pos = chars.iter()
-                               .position(|c| vowels.contains(c))
-                               .unwrap_or(0); // if no vowel found
 
-                let (head, tail) = chars.split_at(pos);
-                let new_word: String = tail.iter().chain(head.iter()).collect();
-                format!("{new_word}ay")
+            // Look for consonant cluster or "qu"
+            let mut idx = 0;
+            while idx < chars.len() {
+                // If we find "qu", we treat both as one unit
+                if idx != 0 && idx + 1 < chars.len() && chars[idx] == 'q' && chars[idx + 1] == 'u' {
+                    idx += 2;
+                    break;
+                }
+
+                // If we hit a vowel, break
+                if vowels.contains(&chars[idx]) {
+                    break;
+                }
+
+                idx += 1;
             }
+
+            // Rearranging
+            let (start, end) = chars.split_at(idx);
+            let new_word: String = end.iter().chain(start.iter()).collect();
+            format!("{new_word}ay")
         })
         .collect::<Vec<_>>()
         .join(" ")
