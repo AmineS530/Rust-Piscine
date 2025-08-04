@@ -1,4 +1,4 @@
-pub fn talking(text: &str) -> &str {
+    pub fn talking(text: &str) -> &str {
     let trimmed = text.trim();
 
     if trimmed.is_empty() {
