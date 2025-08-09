@@ -11,7 +11,7 @@ pub fn fetch_data(server: Result<&str, &str>, security_level: Security) -> Strin
         Security::Unknown => server.unwrap().to_string(),
         Security::Message => match server {
             Ok(s) => s.to_string(),
-            Err(err) => panic!("{}", err),
+            Err(_) => panic!("ERROR: program stops"),
         },
         Security::Warning => match server {
             Ok(s) => s.to_string(),
