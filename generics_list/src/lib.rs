@@ -26,7 +26,6 @@ impl<T> List<T> {
         if let Some(node) = self.head.take() {
             self.head = node.next.map(|boxed_node| *boxed_node);
         }
-        self.head = None;
     }
 
     pub fn len(&self) -> usize {
